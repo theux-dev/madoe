@@ -1,0 +1,40 @@
+name: Build and test
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+# Só leitura do repositório: o workflow não precisa de nenhuma outra permissão.
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # Usa a versão do Gradle definida em gradle/wrapper/gradle-wrapper.properties.
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Instalar plataforma e build-tools do Android
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"
+
+      # Garante o bit de execução mesmo se ele se perder ao subir os arquivos.
+      - name: Permitir execução do Gradle Wrapper
+        run: chmod +x ./gradlew
+
+      - name: Testes de unidade
+        run: ./gradlew testDebugUnitTest --no-daemon
+
+      - name: Compilar (debug)
+        run: ./gradlew assembleDebug --no-daemon

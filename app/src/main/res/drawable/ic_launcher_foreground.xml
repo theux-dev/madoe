@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Madoe: quatro quadros afiados em redemoinho em volta de uma faísca de quatro pontas. -->
+    <path android:fillColor="#E23B2E" android:pathData="M81.69,37.36L69.95,56.53L58.37,51.37L59.26,38.73Z" />
+    <path android:fillColor="#FDF8F0" android:pathData="M67.13,75.86L51.74,68.27L56.63,58.37L67.66,58.70Z" />
+    <path android:fillColor="#E23B2E" android:pathData="M26.31,70.64L38.05,51.47L49.63,56.63L48.74,69.27Z" />
+    <path android:fillColor="#FDF8F0" android:pathData="M40.87,32.14L56.26,39.73L51.37,49.63L40.34,49.30Z" />
+    <path android:fillColor="#FFE15A" android:pathData="M56.88,42.45L56.33,52.60L65.55,56.88L55.40,56.33L51.12,65.55L51.67,55.40L42.45,51.12L52.60,51.67Z" />
+</vector>

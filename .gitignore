@@ -1,0 +1,23 @@
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+/build/
+/captures/
+.externalNativeBuild/
+.cxx/
+app/build/
+*.apk
+*.aab
+# Chaves de assinatura: nunca vão para o repositório
+*.jks
+*.keystore
+keystore.properties
+
+# Kotlin / JVM
+.kotlin/
+*.hprof
+
+# Artefatos de release
+app/release/

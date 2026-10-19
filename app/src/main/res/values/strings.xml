@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Madoe</string>
+
+    <!-- Navegação -->
+    <string name="tab_recent">Recentes</string>
+    <string name="tab_files">Arquivos</string>
+    <string name="tab_featured">Favoritos</string>
+    <string name="tab_collections">Coleções</string>
+
+    <!-- Barra superior -->
+    <string name="more_options">Mais opções</string>
+    <string name="back">Voltar</string>
+    <string name="settings">Configurações</string>
+
+    <!-- Estados vazios -->
+    <string name="empty_recent_title">Nada por aqui ainda</string>
+    <string name="empty_recent_message">Importe quadrinhos na aba Arquivos e eles aparecem aqui, com o progresso de leitura.</string>
+    <string name="empty_files_title">Sua biblioteca está vazia</string>
+    <string name="empty_files_message">Os quadrinhos importados aparecerão aqui.</string>
+    <string name="empty_featured_title">Nenhum favorito</string>
+    <string name="empty_featured_message">Os títulos que você marcar com o coração aparecerão aqui.</string>
+    <string name="empty_collections_title">Nenhuma coleção</string>
+    <string name="empty_collections_message">Agrupe seus quadrinhos em coleções para organizar a biblioteca.</string>
+
+    <!-- Configurações -->
+    <string name="settings_section_appearance">Aparência</string>
+    <string name="settings_section_reading">Leitura</string>
+    <string name="setting_theme">Tema</string>
+    <string name="theme_system">Sistema</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Escuro</string>
+    <string name="setting_direction">Direção de leitura</string>
+    <string name="direction_ltr">Esquerda para direita (HQs)</string>
+    <string name="direction_rtl">Direita para esquerda (mangás)</string>
+    <string name="setting_reading_mode">Modo de leitura</string>
+    <string name="mode_paged">Página a página</string>
+    <string name="mode_continuous">Rolagem contínua</string>
+    <string name="setting_fit">Ajuste da página</string>
+    <string name="fit_width">À largura</string>
+    <string name="fit_height">À altura</string>
+    <string name="setting_navigation">Navegação entre páginas</string>
+    <string name="nav_gestures_and_tap">Gestos e toque</string>
+    <string name="nav_gestures_only">Somente gestos</string>
+    <string name="nav_tap_only">Somente toque</string>
+    <string name="setting_orientation">Orientação do leitor</string>
+    <string name="orientation_auto">Automática</string>
+    <string name="orientation_portrait">Vertical</string>
+    <string name="orientation_landscape">Horizontal</string>
+
+    <!-- Configurações: biblioteca -->
+    <string name="settings_section_library">Biblioteca</string>
+    <string name="setting_auto_scan">Procurar novos quadrinhos ao abrir o app</string>
+    <string name="setting_folders">Pastas monitoradas</string>
+    <string name="no_folders">Nenhuma pasta adicionada. Adicione uma pasta e o app encontra os quadrinhos dentro dela sozinho.</string>
+    <string name="remove_folder">Remover pasta</string>
+    <string name="add_folder">Adicionar pasta</string>
+    <string name="scan_now">Procurar novos agora</string>
+
+    <!-- Importação -->
+    <string name="add">Adicionar</string>
+    <string name="import_files">Importar arquivos</string>
+    <string name="importing">Importando…</string>
+    <string name="import_done">Importação concluída</string>
+    <string name="import_imported">Importados: %1$d</string>
+    <string name="import_duplicates">Já estavam na biblioteca: %1$d</string>
+    <string name="import_unsupported">Formato não reconhecido: %1$d</string>
+    <string name="import_failed">Com erro: %1$d</string>
+    <string name="dismiss">OK</string>
+    <string name="images_title">Imagens (%1$d páginas)</string>
+    <string name="pages_count">%1$d págs.</string>
+    <string name="internal_storage">Armazenamento interno</string>
+
+    <!-- Fase 3: busca, ordenação, ações -->
+    <string name="search">Pesquisar</string>
+    <string name="search_hint">Pesquisar título</string>
+    <string name="close_search">Fechar pesquisa</string>
+    <string name="no_results_title">Nenhum resultado</string>
+    <string name="no_results_message">Nenhum título com esse nome.</string>
+    <string name="sort">Ordenar</string>
+    <string name="sort_name">Nome</string>
+    <string name="sort_added">Adicionados recentemente</string>
+    <string name="sort_last_read">Última leitura</string>
+    <string name="favorite_add">Favoritar</string>
+    <string name="favorite_remove">Remover dos favoritos</string>
+    <string name="menu_details">Detalhes</string>
+    <string name="menu_rename">Renomear</string>
+    <string name="menu_remove_library">Remover da biblioteca</string>
+    <string name="menu_remove_from_collection">Remover desta coleção</string>
+    <string name="rename_title">Renomear título</string>
+    <string name="rename_label">Nome</string>
+    <string name="save">Salvar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="done">Pronto</string>
+    <string name="remove_title">Remover da biblioteca?</string>
+    <string name="remove_message">“%1$s” sai da biblioteca, mas o arquivo original no seu aparelho não é apagado.</string>
+    <string name="remove_confirm">Remover</string>
+    <string name="pick_collection_title">Adicionar a uma coleção</string>
+    <string name="no_collections_yet">Você ainda não tem coleções. Crie a primeira abaixo.</string>
+    <string name="new_collection">Nova coleção</string>
+    <string name="collection_name">Nome da coleção</string>
+    <string name="create">Criar</string>
+    <string name="section_continue">Continue lendo</string>
+    <string name="section_added">Adicionados recentemente</string>
+    <string name="collection_title_count">%1$s (%2$d)</string>
+    <string name="reading_progress_percent">Progresso de leitura: %1$d%%</string>
+    <string name="rename_collection">Renomear coleção</string>
+    <string name="delete_collection">Excluir coleção</string>
+    <string name="delete_collection_title">Excluir coleção?</string>
+    <string name="delete_collection_message">A coleção “%1$s” será excluída. Os quadrinhos continuam na biblioteca.</string>
+    <string name="empty_collection_title">Coleção vazia</string>
+    <string name="empty_collection_message">Use o ícone de coleção em um título para adicioná-lo aqui.</string>
+    <string name="details_title">Detalhes</string>
+    <string name="detail_format">Formato</string>
+    <string name="detail_pages">Páginas</string>
+    <string name="detail_size">Tamanho</string>
+    <string name="detail_added">Adicionado em</string>
+    <string name="detail_last_read">Última leitura</string>
+    <string name="detail_never">Nunca lido</string>
+    <string name="detail_progress">Progresso</string>
+
+    <!-- Fase 4: leitor -->
+    <string name="read">Ler</string>
+    <string name="continue_reading">Continuar leitura</string>
+    <string name="reader_error_title">Não foi possível abrir este quadrinho</string>
+    <string name="reader_page_description">Página %1$d</string>
+    <string name="page_load_failed">Não foi possível carregar esta página.</string>
+    <string name="retry">Tentar novamente</string>
+    <string name="page_label">%1$d / %2$d</string>
+    <string name="previous_page">Página anterior</string>
+    <string name="next_page">Próxima página</string>
+    <string name="reader_settings">Ajustes de leitura</string>
+    <string name="go_to_page">Ir para página</string>
+    <string name="go_to_page_label">Página (1 a %1$d)</string>
+    <string name="go">Ir</string>
+    <string name="bookmarks">Marcadores</string>
+    <string name="bookmark_add">Marcar esta página</string>
+    <string name="bookmark_remove">Remover marcador desta página</string>
+    <string name="bookmark_delete">Excluir marcador</string>
+    <string name="bookmark_page">Página %1$d</string>
+    <string name="no_bookmarks">Nenhum marcador neste quadrinho.</string>
+    <string name="night_mode">Modo noturno</string>
+    <string name="information">Informações</string>
+    <string name="close">Fechar</string>
+
+    <!-- Fase 5: introdução, armazenamento, erros -->
+    <string name="onboarding_skip">Pular introdução</string>
+    <string name="onboarding_next">Próximo</string>
+    <string name="onboarding_start">Começar</string>
+    <string name="onboarding_1_title">Suas HQs, sempre com você</string>
+    <string name="onboarding_1_text">Leia HQs e mangás nos formatos CBZ, CBR, CB7, CBT e PDF, e também imagens soltas, direto no seu aparelho. Sem cadastro e sem internet: basta abrir os arquivos e começar a ler.</string>
+    <string name="onboarding_2_title">Como adicionar HQs</string>
+    <string name="onboarding_2_text">Na aba Arquivos, importe arquivos ou adicione uma pasta. O app encontra os quadrinhos dentro dela e procura novos sempre que você abre. Os arquivos originais nunca são copiados nem apagados.</string>
+    <string name="onboarding_3_title">Leia do seu jeito</string>
+    <string name="onboarding_3_text">Escolha entre HQs e mangás (direita para esquerda), dê zoom, use rolagem contínua e deixe o app lembrar a página onde você parou. Organize tudo com favoritos e coleções.</string>
+    <string name="settings_section_storage">Armazenamento</string>
+    <string name="storage_covers">Capas geradas</string>
+    <string name="storage_cache">Cache temporário</string>
+    <string name="clear_cache">Limpar cache temporário</string>
+    <string name="cache_cleared">Cache limpo: %1$s liberados.</string>
+    <string name="storage_note">O app nunca copia nem apaga os arquivos dos seus quadrinhos. O cache temporário só guarda cópias provisórias usadas para abrir alguns arquivos.</string>
+    <string name="settings_section_about">Sobre</string>
+    <string name="about_version">Versão %1$s</string>
+    <string name="about_text">Leitor de quadrinhos local, sem conta e sem internet.</string>
+    <string name="about_copyright">© 2026 Matheus Barbosa (theux-dev). Todos os direitos reservados.</string>
+    <string name="app_subtitle">Leitor de HQ e Mangá</string>
+    <string name="app_slogan">A janela para as suas histórias</string>
+    <string name="reader_error_hint">O arquivo pode ter sido movido, apagado ou o app pode ter perdido o acesso a ele. Você pode remover este título da biblioteca e importar de novo.</string>
+</resources>
