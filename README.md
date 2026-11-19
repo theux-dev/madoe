@@ -1,5 +1,7 @@
 # Madoe - Leitor de HQ e Mangá
 
+[![Build and test](https://github.com/theux-dev/madoe/actions/workflows/build.yml/badge.svg)](https://github.com/theux-dev/madoe/actions/workflows/build.yml)
+
 > *A janela para as suas histórias.*
 
 Android · Kotlin · Jetpack Compose · Material 3 · 100% offline
@@ -50,13 +52,42 @@ gerenciamento de arquivos. Ele é publicado aqui como projeto de portfólio.
 
 ## Capturas de tela
 
-Em breve.
+<table>
+  <tr>
+    <td align="center"><img src="docs/screenshots/recentes.png" width="200" alt="Tela Recentes, com os quadrinhos em andamento"><br><sub>Recentes</sub></td>
+    <td align="center"><img src="docs/screenshots/arquivos.png" width="200" alt="Tela Arquivos, com a lista da biblioteca"><br><sub>Arquivos</sub></td>
+    <td align="center"><img src="docs/screenshots/colecoes.png" width="200" alt="Tela Coleções, com uma coleção criada"><br><sub>Coleções</sub></td>
+    <td align="center"><img src="docs/screenshots/leitor.jpg" width="200" alt="Leitor aberto na capa de um quadrinho, com os controles visíveis"><br><sub>Leitor</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/configuracoes-1.png" width="200" alt="Configurações: aparência, biblioteca e armazenamento"><br><sub>Configurações</sub></td>
+    <td align="center"><img src="docs/screenshots/configuracoes-2.png" width="200" alt="Configurações: opções de leitura e a seção Sobre"><br><sub>Leitura e Sobre</sub></td>
+    <td align="center"><img src="docs/screenshots/abertura.png" width="200" alt="Tela de abertura com o ícone do Madoe"><br><sub>Abertura</sub></td>
+  </tr>
+</table>
 
-<!--
-Quando houver imagens, crie a pasta docs/screenshots/, coloque as capturas nela e troque o
-"Em breve." acima por uma tabela com as imagens, usando a sintaxe de imagem do Markdown.
-Use só quadrinhos de domínio público ou com licença que permita a exibição, e dê o crédito.
--->
+Capturas feitas com o tema escuro do sistema. Nas telas só aparecem capas dos quadrinhos de exemplo
+(veja a seção seguinte).
+
+## Quadrinhos de exemplo
+
+O Madoe **não inclui nenhum quadrinho**. Os exemplos usados nos testes e nas demonstrações são obras
+antigas, em domínio público ou indicadas como tal:
+
+| Obra | Autor / editora | Ano | Situação |
+|---|---|---|---|
+| *As Aventuras de Nhô-Quim* (capítulo I) | Angelo Agostini, *Vida Fluminense* | 1869 | Domínio público (o autor morreu em 1910) |
+| *Little Nemo in Slumberland* | Winsor McCay, tiras dominicais de jornais dos EUA | 1905 a 1914 | Domínio público (o autor morreu em 1934) |
+| *Funny Pages* nº 10 | Centaur Publications | abril de 1937 | Indicada como domínio público pelo Digital Comic Museum e pelo Comic Book Plus. Só a capa aparece nas capturas |
+| *The Flame* nº 1 | Fox Feature Syndicate | verão de 1940 | Indicada como domínio público pelo Digital Comic Museum e pelo Comic Book Plus. Só a capa aparece nas capturas |
+
+Fontes das digitalizações:
+
+- *Little Nemo in Slumberland*: [Internet Archive](https://archive.org/details/LittleNemo1905-14FromWinsorMccayAsCbz) (item `LittleNemo1905-14FromWinsorMccayAsCbz`).
+- *As Aventuras de Nhô-Quim*: [Internet Archive](https://archive.org/details/nho-quim) (item `nho-quim`). A página usada nas demonstrações foi montada a partir dos quadros do capítulo I.
+- *Funny Pages* nº 10 e *The Flame* nº 1: Digital Comic Museum e Comic Book Plus.
+
+Se você é titular de direitos de alguma dessas obras e quer a remoção de uma imagem, abra uma *issue*.
 
 ## Tecnologias
 
@@ -212,7 +243,7 @@ aceitando contribuições de código** (pull requests).
 
 ## Créditos
 
-- Desenvolvido por Matheus Barbosa, com auxílio de IA (Claude).
+- Desenvolvido por Matheus Barbosa.
 - A interface foi inspirada em referências de leitores de quadrinhos existentes, sem uso de arte,
   nome ou marca de terceiros. O ícone e o logotipo do Madoe são originais deste projeto.
 - Fonte Bowlby One, de Vernon Adams (SIL Open Font License 1.1).
