@@ -11,6 +11,7 @@ import com.mangareader.app.R
 
 object Routes {
     const val SETTINGS = "settings"
+    const val LICENSES = "licenses"
     const val ONBOARDING = "onboarding"
     const val DETAILS = "details/{comicId}"
     const val COLLECTION = "collection/{collectionId}"

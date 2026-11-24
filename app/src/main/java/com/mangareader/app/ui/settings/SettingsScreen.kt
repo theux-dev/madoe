@@ -27,6 +27,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -43,6 +44,7 @@ import com.mangareader.app.data.library.folderLabel
 import com.mangareader.app.data.model.FitMode
 import com.mangareader.app.data.model.OrientationPref
 import com.mangareader.app.data.model.PageNavigation
+import com.mangareader.app.data.model.ReaderBackground
 import com.mangareader.app.data.model.ReadingDirection
 import com.mangareader.app.data.model.ReadingMode
 import com.mangareader.app.data.model.ThemeMode
@@ -50,7 +52,11 @@ import com.mangareader.app.ui.components.MangaBackTopBar
 import com.mangareader.app.ui.components.halftoneEdge
 
 @Composable
-fun SettingsScreen(onBack: () -> Unit, viewModel: SettingsViewModel = hiltViewModel()) {
+fun SettingsScreen(
+    onBack: () -> Unit,
+    onOpenLicenses: () -> Unit,
+    viewModel: SettingsViewModel = hiltViewModel(),
+) {
     val s by viewModel.settings.collectAsStateWithLifecycle()
     val task by viewModel.libraryState.collectAsStateWithLifecycle()
     val storage by viewModel.storage.collectAsStateWithLifecycle()
@@ -203,6 +209,18 @@ fun SettingsScreen(onBack: () -> Unit, viewModel: SettingsViewModel = hiltViewMo
                     selected = s.orientation,
                     onSelect = viewModel::setOrientation,
                 )
+                ChoiceSetting(
+                    title = stringResource(R.string.setting_reader_background),
+                    options = listOf(
+                        ReaderBackground.THEME to stringResource(R.string.bg_theme),
+                        ReaderBackground.BLACK to stringResource(R.string.bg_black),
+                        ReaderBackground.DARK_GRAY to stringResource(R.string.bg_dark_gray),
+                        ReaderBackground.PAPER to stringResource(R.string.bg_paper),
+                        ReaderBackground.WHITE to stringResource(R.string.bg_white),
+                    ),
+                    selected = s.readerBackground,
+                    onSelect = viewModel::setReaderBackground,
+                )
             }
             SettingsCard(stringResource(R.string.settings_section_about)) {
                 Text(stringResource(R.string.app_name), style = MaterialTheme.typography.titleMedium)
@@ -226,6 +244,7 @@ fun SettingsScreen(onBack: () -> Unit, viewModel: SettingsViewModel = hiltViewMo
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
+                TextButton(onClick = onOpenLicenses) { Text(stringResource(R.string.third_party_licenses)) }
             }
         }
     }

@@ -13,6 +13,13 @@ interface PageSource : Closeable {
      * @throws CorruptComicException se a página não puder ser lida.
      */
     fun loadPage(index: Int, maxWidth: Int, maxHeight: Int): Bitmap
+
+    /**
+     * A imagem original da página, sem recompressão (para "salvar página como imagem").
+     * Devolve `null` se o formato não oferecer isso.
+     * @throws CorruptComicException se a página não puder ser lida.
+     */
+    fun readOriginal(index: Int): OriginalPage? = null
 }
 
 class UnsupportedFormatException(message: String) : Exception(message)

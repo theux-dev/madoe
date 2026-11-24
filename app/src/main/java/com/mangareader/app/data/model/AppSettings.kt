@@ -6,6 +6,7 @@ enum class ReadingMode { PAGED, CONTINUOUS }
 enum class FitMode { WIDTH, HEIGHT }
 enum class PageNavigation { GESTURES_AND_TAP, GESTURES_ONLY, TAP_ONLY }
 enum class OrientationPref { AUTO, PORTRAIT, LANDSCAPE }
+enum class ReaderBackground { THEME, BLACK, DARK_GRAY, PAPER, WHITE }
 enum class SortOrder { NAME, RECENTLY_ADDED, LAST_READ }
 
 /** Preferências do usuário, persistidas no DataStore. */
@@ -18,6 +19,7 @@ data class AppSettings(
     val orientation: OrientationPref = OrientationPref.AUTO,
     val sortOrder: SortOrder = SortOrder.NAME,
     val readerNightMode: Boolean = false,
+    val readerBackground: ReaderBackground = ReaderBackground.THEME,
     val onboardingDone: Boolean = false,
     val autoScanOnStart: Boolean = true,
     /** URIs (árvore SAF) das pastas que o usuário adicionou à biblioteca. */

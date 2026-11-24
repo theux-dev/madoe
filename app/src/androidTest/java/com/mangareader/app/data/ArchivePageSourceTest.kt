@@ -111,4 +111,15 @@ class ArchivePageSourceTest {
         val file = tempFile("junk.cbz").also { it.writeText("isto não é um arquivo compactado") }
         ArchivePageSource.open(context, Uri.fromFile(file)).close()
     }
+
+    @Test fun readOriginalReturnsTheFileBytesUnchanged() {
+        val original = png(33)
+        val uri = zipOf("test.cbz", "01.png" to original)
+        ArchivePageSource.open(context, uri).use { source ->
+            val page = source.readOriginal(0)!!
+            assertEquals("png", page.extension)
+            assertEquals("image/png", page.mimeType)
+            org.junit.Assert.assertArrayEquals(original, page.bytes)
+        }
+    }
 }

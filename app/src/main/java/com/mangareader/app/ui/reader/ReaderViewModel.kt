@@ -9,12 +9,16 @@ import com.mangareader.app.data.model.AppSettings
 import com.mangareader.app.data.model.FitMode
 import com.mangareader.app.data.model.OrientationPref
 import com.mangareader.app.data.model.PageNavigation
+import com.mangareader.app.data.model.ReaderBackground
 import com.mangareader.app.data.model.ReadingDirection
 import com.mangareader.app.data.model.ReadingMode
 import com.mangareader.app.data.prefs.SettingsRepository
 import com.mangareader.app.data.repo.BookmarkRepository
 import com.mangareader.app.data.repo.ComicRepository
 import com.mangareader.app.data.source.PageSourceFactory
+import com.mangareader.app.data.source.exportFileName
+import com.mangareader.app.data.storage.PageSaver
+import com.mangareader.app.data.storage.SaveResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.CancellationException
@@ -22,6 +26,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -30,6 +36,12 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
+/** Avisos rápidos mostrados pela tela do leitor (Toast). */
+sealed interface ReaderMessage {
+    data class PageSaved(val pageNumber: Int) : ReaderMessage
+    data object SaveFailed : ReaderMessage
+}
 
 sealed interface ReaderState {
     data object Loading : ReaderState
@@ -44,6 +56,7 @@ class ReaderViewModel @Inject constructor(
     private val bookmarkRepository: BookmarkRepository,
     private val factory: PageSourceFactory,
     private val settingsRepository: SettingsRepository,
+    private val pageSaver: PageSaver,
 ) : ViewModel() {
 
     private val comicId: Long = checkNotNull(savedStateHandle.get<Long>("comicId"))
@@ -61,6 +74,12 @@ class ReaderViewModel @Inject constructor(
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
     )
+
+    private val _messages = MutableSharedFlow<ReaderMessage>(extraBufferCapacity = 4)
+    val messages: SharedFlow<ReaderMessage> = _messages.asSharedFlow()
+
+    /** O salvamento sem permissões usa o MediaStore e só existe a partir do Android 10. */
+    val canSavePages: Boolean = pageSaver.isSupported
 
     private var loader: PageLoader? = null
 
@@ -100,6 +119,27 @@ class ReaderViewModel @Inject constructor(
             comics.removeFromLibrary(comicId)
             onDone()
         }
+    }
+
+    /** Salva a imagem original da página [page] (a partir de 0) na galeria, pasta Pictures/Madoe. */
+    fun savePage(page: Int) {
+        val ready = _state.value as? ReaderState.Ready ?: return
+        viewModelScope.launch {
+            val original = ready.loader.original(page)
+            if (original == null) {
+                _messages.tryEmit(ReaderMessage.SaveFailed)
+                return@launch
+            }
+            val fileName = exportFileName(ready.comic.title, page + 1, original.extension)
+            val result = pageSaver.save(original, fileName)
+            _messages.tryEmit(
+                if (result is SaveResult.Saved) ReaderMessage.PageSaved(page + 1) else ReaderMessage.SaveFailed,
+            )
+        }
+    }
+
+    fun setReaderBackground(v: ReaderBackground) {
+        viewModelScope.launch { settingsRepository.setReaderBackground(v) }
     }
 
     fun onPageChanged(page: Int) {

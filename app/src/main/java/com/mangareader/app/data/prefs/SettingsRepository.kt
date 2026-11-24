@@ -13,6 +13,7 @@ import com.mangareader.app.data.model.AppSettings
 import com.mangareader.app.data.model.FitMode
 import com.mangareader.app.data.model.OrientationPref
 import com.mangareader.app.data.model.PageNavigation
+import com.mangareader.app.data.model.ReaderBackground
 import com.mangareader.app.data.model.ReadingDirection
 import com.mangareader.app.data.model.ReadingMode
 import com.mangareader.app.data.model.SortOrder
@@ -36,6 +37,7 @@ private object Keys {
     val ORIENTATION = stringPreferencesKey("orientation")
     val SORT = stringPreferencesKey("sort_order")
     val ONBOARDING = booleanPreferencesKey("onboarding_done")
+    val READER_BG = stringPreferencesKey("reader_background")
     val NIGHT = booleanPreferencesKey("reader_night_mode")
     val AUTO_SCAN = booleanPreferencesKey("auto_scan_on_start")
     val FOLDERS = stringSetPreferencesKey("library_folders")
@@ -57,6 +59,8 @@ class SettingsRepository @Inject constructor(
     suspend fun setOrientation(value: OrientationPref) = put(Keys.ORIENTATION, value)
 
     suspend fun setSortOrder(value: SortOrder) = put(Keys.SORT, value)
+
+    suspend fun setReaderBackground(value: ReaderBackground) = put(Keys.READER_BG, value)
 
     suspend fun setReaderNightMode(value: Boolean) {
         context.settingsDataStore.edit { it[Keys.NIGHT] = value }
@@ -92,6 +96,7 @@ private fun Preferences.toSettings() = AppSettings(
     orientation = enumOrDefault(this[Keys.ORIENTATION], OrientationPref.AUTO),
     sortOrder = enumOrDefault(this[Keys.SORT], SortOrder.NAME),
     readerNightMode = this[Keys.NIGHT] ?: false,
+    readerBackground = enumOrDefault(this[Keys.READER_BG], ReaderBackground.THEME),
     onboardingDone = this[Keys.ONBOARDING] ?: false,
     autoScanOnStart = this[Keys.AUTO_SCAN] ?: true,
     libraryFolders = this[Keys.FOLDERS] ?: emptySet(),

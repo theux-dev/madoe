@@ -48,6 +48,18 @@ class ArchivePageSource internal constructor(
         return decodeSampled(bytes, maxWidth, maxHeight)
     }
 
+    override fun readOriginal(index: Int): OriginalPage? {
+        val entry = pages[index]
+        val bytes = try {
+            backend.read(entry)
+        } catch (e: Exception) {
+            throw CorruptComicException("Não foi possível ler a página ${index + 1}", e)
+        }
+        val fromName = backend.entryNames[entry].substringAfterLast('.', "").lowercase()
+        val extension = if (mimeForExtension(fromName) != null) fromName else sniffImageExtension(bytes) ?: return null
+        return OriginalPage(bytes, extension)
+    }
+
     override fun close() = backend.close()
 
     companion object {

@@ -13,16 +13,23 @@ class ImageListPageSource(
 
     override val pageCount: Int get() = uris.size
 
-    override fun loadPage(index: Int, maxWidth: Int, maxHeight: Int): Bitmap {
-        val bytes = try {
+    override fun loadPage(index: Int, maxWidth: Int, maxHeight: Int): Bitmap =
+        decodeSampled(readBytes(index), maxWidth, maxHeight)
+
+    override fun readOriginal(index: Int): OriginalPage? {
+        val bytes = readBytes(index)
+        val extension = sniffImageExtension(bytes) ?: return null
+        return OriginalPage(bytes, extension)
+    }
+
+    private fun readBytes(index: Int): ByteArray =
+        try {
             context.contentResolver.openInputStream(uris[index])?.use { it.readBytes() }
         } catch (e: IOException) {
             throw CorruptComicException("Não foi possível ler a imagem ${index + 1}", e)
         } catch (e: SecurityException) {
             throw CorruptComicException("Sem permissão para ler a imagem ${index + 1}", e)
         } ?: throw CorruptComicException("Imagem ${index + 1} inacessível")
-        return decodeSampled(bytes, maxWidth, maxHeight)
-    }
 
     override fun close() = Unit
 }

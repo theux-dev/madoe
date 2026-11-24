@@ -42,6 +42,10 @@ gerenciamento de arquivos. Ele é publicado aqui como projeto de portfólio.
 - Modo noturno, orientação do leitor (automática, vertical ou horizontal), tela cheia e tela sempre
   acesa durante a leitura.
 - O progresso é salvo a cada página, e a leitura é retomada exatamente de onde parou.
+- **Salvar a página como imagem** (menu ⋮ do leitor): grava na galeria, na pasta Madoe, a imagem original da
+  página, sem recompressão e sem pedir nenhuma permissão (Android 10 ou mais novo). Em PDF, a página é
+  renderizada em alta resolução e salva como PNG.
+- Fundo do leitor ajustável: do tema, preto, cinza escuro, papel ou branco.
 - Páginas ilegíveis ou corrompidas mostram um aviso com opção de tentar de novo, sem derrubar o app.
 
 **Configurações**
@@ -49,6 +53,7 @@ gerenciamento de arquivos. Ele é publicado aqui como projeto de portfólio.
 - Tema claro, escuro ou do sistema; preferências de leitura salvas entre sessões.
 - Gerenciamento das pastas monitoradas e do armazenamento (capas geradas e cache temporário).
 - Introdução na primeira abertura.
+- Tela de licenças de terceiros (em Configurações > Sobre).
 
 ## Capturas de tela
 
@@ -178,7 +183,7 @@ compilação de debug a cada push. Os testes instrumentados não rodam lá, porq
   porque o formato obriga a descompactar o que vem antes.
 - O zoom por pinça existe só no modo página a página; ainda não há zoom por toque duplo nem no modo
   de rolagem contínua.
-- Ainda não é possível compartilhar ou salvar uma página como imagem.
+- Salvar a página como imagem exige Android 10 ou mais novo; ainda não é possível compartilhá-la diretamente com outros apps.
 - Se um arquivo for movido ou apagado, o leitor avisa ao tentar abri-lo e oferece remover o título,
   mas os cartões da biblioteca ainda não são marcados como indisponíveis automaticamente.
 - Os testes manuais foram feitos até agora principalmente em um aparelho Android.

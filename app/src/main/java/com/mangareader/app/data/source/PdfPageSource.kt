@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.pdf.PdfRenderer
 import android.net.Uri
 import android.os.ParcelFileDescriptor
+import java.io.ByteArrayOutputStream
 import java.io.Closeable
 import java.io.File
 import java.io.IOException
@@ -43,6 +44,17 @@ class PdfPageSource private constructor(
         }
     }
 
+    /** PDF não guarda "a imagem da página": ela é renderizada em alta resolução e salva como PNG. */
+    override fun readOriginal(index: Int): OriginalPage? {
+        val bitmap = loadPage(index, EXPORT_WIDTH, EXPORT_HEIGHT)
+        return try {
+            val out = ByteArrayOutputStream()
+            if (bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)) OriginalPage(out.toByteArray(), "png") else null
+        } finally {
+            bitmap.recycle()
+        }
+    }
+
     @Synchronized
     override fun close() {
         runCatching { renderer.close() }
@@ -51,6 +63,8 @@ class PdfPageSource private constructor(
 
     companion object {
         private const val MAX_PIXELS = 16_000_000f
+        private const val EXPORT_WIDTH = 2480   // cerca de 300 dpi em uma página A4
+        private const val EXPORT_HEIGHT = 3508
 
         fun open(context: Context, uri: Uri): PdfPageSource {
             val pfd = context.contentResolver.openFileDescriptor(uri, "r")

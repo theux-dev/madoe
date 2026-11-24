@@ -43,6 +43,7 @@ import com.mangareader.app.data.model.AppSettings
 import com.mangareader.app.data.model.FitMode
 import com.mangareader.app.data.model.OrientationPref
 import com.mangareader.app.data.model.PageNavigation
+import com.mangareader.app.data.model.ReaderBackground
 import com.mangareader.app.data.model.ReadingDirection
 import com.mangareader.app.data.model.ReadingMode
 import com.mangareader.app.ui.components.formatDate
@@ -112,6 +113,18 @@ internal fun ReaderSettingsSheet(
                 ),
                 selected = settings.orientation,
                 onSelect = viewModel::setOrientation,
+            )
+            ChoiceSetting(
+                title = stringResource(R.string.setting_reader_background),
+                options = listOf(
+                    ReaderBackground.THEME to stringResource(R.string.bg_theme),
+                    ReaderBackground.BLACK to stringResource(R.string.bg_black),
+                    ReaderBackground.DARK_GRAY to stringResource(R.string.bg_dark_gray),
+                    ReaderBackground.PAPER to stringResource(R.string.bg_paper),
+                    ReaderBackground.WHITE to stringResource(R.string.bg_white),
+                ),
+                selected = settings.readerBackground,
+                onSelect = viewModel::setReaderBackground,
             )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(

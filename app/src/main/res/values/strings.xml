@@ -166,4 +166,19 @@
     <string name="app_subtitle">Leitor de HQ e Mangá</string>
     <string name="app_slogan">A janela para as suas histórias</string>
     <string name="reader_error_hint">O arquivo pode ter sido movido, apagado ou o app pode ter perdido o acesso a ele. Você pode remover este título da biblioteca e importar de novo.</string>
+
+    <!-- Fase 6 -->
+    <string name="menu_save_page">Salvar página como imagem</string>
+    <string name="page_saved">Página %1$d salva na galeria (pasta Madoe)</string>
+    <string name="page_save_failed">Não foi possível salvar a página</string>
+    <string name="setting_reader_background">Fundo do leitor</string>
+    <string name="bg_theme">Do tema</string>
+    <string name="bg_black">Preto</string>
+    <string name="bg_dark_gray">Cinza escuro</string>
+    <string name="bg_paper">Papel</string>
+    <string name="bg_white">Branco</string>
+    <string name="third_party_licenses">Licenças de terceiros</string>
+    <string name="license_apache_title">Apache License 2.0</string>
+    <string name="license_ofl_title">SIL Open Font License 1.1 (fonte Bowlby One)</string>
+    <string name="license_unrar_title">Licença do UnRAR (junrar)</string>
 </resources>

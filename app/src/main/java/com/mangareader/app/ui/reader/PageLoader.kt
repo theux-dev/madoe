@@ -2,6 +2,7 @@ package com.mangareader.app.ui.reader
 
 import android.graphics.Bitmap
 import android.util.LruCache
+import com.mangareader.app.data.source.OriginalPage
 import com.mangareader.app.data.source.PageSource
 import java.io.Closeable
 import kotlinx.coroutines.CancellationException
@@ -31,6 +32,22 @@ class PageLoader(private val source: PageSource) : Closeable {
                 throw e
             } catch (e: OutOfMemoryError) {
                 cache.evictAll()
+                null
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
+
+    /** A imagem original da página, para salvar como arquivo; `null` se não foi possível obtê-la. */
+    suspend fun original(index: Int): OriginalPage? {
+        if (index !in 0 until pageCount) return null
+        return withContext(Dispatchers.IO) {
+            try {
+                source.readOriginal(index)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: OutOfMemoryError) {
                 null
             } catch (e: Exception) {
                 null

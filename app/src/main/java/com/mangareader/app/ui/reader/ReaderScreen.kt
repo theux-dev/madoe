@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.ActivityInfo
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -72,6 +73,7 @@ import com.mangareader.app.R
 import com.mangareader.app.data.model.AppSettings
 import com.mangareader.app.data.model.OrientationPref
 import com.mangareader.app.data.model.PageNavigation
+import com.mangareader.app.data.model.ReaderBackground
 import com.mangareader.app.data.model.ReadingDirection
 import com.mangareader.app.data.model.ReadingMode
 import kotlin.math.roundToInt
@@ -199,6 +201,17 @@ private fun ReaderContent(
 
     ImmersiveEffect(controlsVisible)
 
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        viewModel.messages.collect { message ->
+            val text = when (message) {
+                is ReaderMessage.PageSaved -> context.getString(R.string.page_saved, message.pageNumber)
+                ReaderMessage.SaveFailed -> context.getString(R.string.page_save_failed)
+            }
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     // Mantém a página atual em sincronia com o modo ativo e salva o progresso a cada troca.
     LaunchedEffect(continuous) {
         if (continuous) {
@@ -235,7 +248,14 @@ private fun ReaderContent(
         }
     }
 
-    val background = if (settings.readerNightMode) Color(0xFF0E0F0C) else MaterialTheme.colorScheme.background
+    val background = when (settings.readerBackground) {
+        ReaderBackground.THEME ->
+            if (settings.readerNightMode) Color(0xFF0E0F0C) else MaterialTheme.colorScheme.background
+        ReaderBackground.BLACK -> Color(0xFF000000)
+        ReaderBackground.DARK_GRAY -> Color(0xFF242424)
+        ReaderBackground.PAPER -> Color(0xFFF1E6CC)
+        ReaderBackground.WHITE -> Color(0xFFFFFFFF)
+    }
 
     Box(
         Modifier
@@ -289,6 +309,7 @@ private fun ReaderContent(
                 onGoTo = { dialog = ReaderDialog.GoTo },
                 onBookmarks = { dialog = ReaderDialog.Bookmarks },
                 onToggleNight = { viewModel.setNightMode(!settings.readerNightMode) },
+                onSavePage = if (viewModel.canSavePages) ({ viewModel.savePage(currentPage) }) else null,
                 onInfo = { dialog = ReaderDialog.Info },
             )
         }
@@ -351,6 +372,7 @@ private fun ReaderTopBar(
     onGoTo: () -> Unit,
     onBookmarks: () -> Unit,
     onToggleNight: () -> Unit,
+    onSavePage: (() -> Unit)?,
     onInfo: () -> Unit,
 ) {
     var menuOpen by remember { mutableStateOf(false) }
@@ -402,6 +424,12 @@ private fun ReaderTopBar(
                         text = { Text(stringResource(R.string.bookmarks)) },
                         onClick = { menuOpen = false; onBookmarks() },
                     )
+                    if (onSavePage != null) {
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.menu_save_page)) },
+                            onClick = { menuOpen = false; onSavePage() },
+                        )
+                    }
                     DropdownMenuItem(
                         text = {
                             Text(

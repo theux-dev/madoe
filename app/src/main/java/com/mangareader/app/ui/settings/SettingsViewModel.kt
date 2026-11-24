@@ -9,6 +9,7 @@ import com.mangareader.app.data.model.AppSettings
 import com.mangareader.app.data.model.FitMode
 import com.mangareader.app.data.model.OrientationPref
 import com.mangareader.app.data.model.PageNavigation
+import com.mangareader.app.data.model.ReaderBackground
 import com.mangareader.app.data.model.ReadingDirection
 import com.mangareader.app.data.model.ReadingMode
 import com.mangareader.app.data.model.ThemeMode
@@ -64,6 +65,7 @@ class SettingsViewModel @Inject constructor(
     fun setFitMode(v: FitMode) = viewModelScope.launch { repository.setFitMode(v) }
     fun setPageNavigation(v: PageNavigation) = viewModelScope.launch { repository.setPageNavigation(v) }
     fun setOrientation(v: OrientationPref) = viewModelScope.launch { repository.setOrientation(v) }
+    fun setReaderBackground(v: ReaderBackground) = viewModelScope.launch { repository.setReaderBackground(v) }
     fun setAutoScanOnStart(v: Boolean) = viewModelScope.launch { repository.setAutoScanOnStart(v) }
 
     fun addFolder(uri: Uri) = library.addFolder(uri)

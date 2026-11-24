@@ -30,6 +30,7 @@ import com.mangareader.app.ui.screens.DetailsScreen
 import com.mangareader.app.ui.screens.FeaturedScreen
 import com.mangareader.app.ui.screens.FilesScreen
 import com.mangareader.app.ui.screens.RecentScreen
+import com.mangareader.app.ui.settings.LicensesScreen
 import com.mangareader.app.ui.settings.SettingsScreen
 
 @Composable
@@ -105,7 +106,13 @@ fun MadoeRoot(showOnboarding: Boolean, onFinishOnboarding: () -> Unit) {
                         onRead = openReader,
                     )
                 }
-                composable(Routes.SETTINGS) { SettingsScreen(onBack = { navController.popBackStack() }) }
+                composable(Routes.SETTINGS) {
+                    SettingsScreen(
+                        onBack = { navController.popBackStack() },
+                        onOpenLicenses = { navController.navigate(Routes.LICENSES) },
+                    )
+                }
+                composable(Routes.LICENSES) { LicensesScreen(onBack = { navController.popBackStack() }) }
             }
         }
     }
