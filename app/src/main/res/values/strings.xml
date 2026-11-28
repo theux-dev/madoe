@@ -181,4 +181,14 @@
     <string name="license_apache_title">Apache License 2.0</string>
     <string name="license_ofl_title">SIL Open Font License 1.1 (fonte Bowlby One)</string>
     <string name="license_unrar_title">Licença do UnRAR (junrar)</string>
+
+    <!-- Fase 7: paletas de cores -->
+    <string name="setting_palette">Paleta de cores</string>
+    <string name="palette_madoe">Madoe</string>
+    <string name="palette_paper">Papel</string>
+    <string name="palette_ocean">Oceano</string>
+    <string name="palette_forest">Floresta</string>
+    <string name="palette_sakura">Sakura</string>
+    <string name="palette_system">Cores do sistema</string>
+    <string name="palette_system_hint">Usa as cores do papel de parede do aparelho (Android 12 ou mais novo).</string>
 </resources>

@@ -9,6 +9,7 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.mangareader.app.data.model.AppPalette
 import com.mangareader.app.data.model.AppSettings
 import com.mangareader.app.data.model.FitMode
 import com.mangareader.app.data.model.OrientationPref
@@ -30,6 +31,7 @@ private val Context.settingsDataStore: DataStore<Preferences> by preferencesData
 
 private object Keys {
     val THEME = stringPreferencesKey("theme_mode")
+    val PALETTE = stringPreferencesKey("palette")
     val DIRECTION = stringPreferencesKey("reading_direction")
     val MODE = stringPreferencesKey("reading_mode")
     val FIT = stringPreferencesKey("fit_mode")
@@ -52,6 +54,7 @@ class SettingsRepository @Inject constructor(
         .map { it.toSettings() }
 
     suspend fun setThemeMode(value: ThemeMode) = put(Keys.THEME, value)
+    suspend fun setPalette(value: AppPalette) = put(Keys.PALETTE, value)
     suspend fun setReadingDirection(value: ReadingDirection) = put(Keys.DIRECTION, value)
     suspend fun setReadingMode(value: ReadingMode) = put(Keys.MODE, value)
     suspend fun setFitMode(value: FitMode) = put(Keys.FIT, value)
@@ -89,6 +92,7 @@ class SettingsRepository @Inject constructor(
 
 private fun Preferences.toSettings() = AppSettings(
     themeMode = enumOrDefault(this[Keys.THEME], ThemeMode.SYSTEM),
+    palette = enumOrDefault(this[Keys.PALETTE], AppPalette.MADOE),
     readingDirection = enumOrDefault(this[Keys.DIRECTION], ReadingDirection.LTR),
     readingMode = enumOrDefault(this[Keys.MODE], ReadingMode.PAGED),
     fitMode = enumOrDefault(this[Keys.FIT], FitMode.WIDTH),

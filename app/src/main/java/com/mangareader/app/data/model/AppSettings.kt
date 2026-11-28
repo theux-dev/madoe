@@ -1,6 +1,9 @@
 package com.mangareader.app.data.model
 
 enum class ThemeMode { SYSTEM, LIGHT, DARK }
+
+/** Paleta de cores do app. [SYSTEM] usa as cores do papel de parede (Android 12 ou mais novo). */
+enum class AppPalette { MADOE, PAPER, OCEAN, FOREST, SAKURA, SYSTEM }
 enum class ReadingDirection { LTR, RTL }
 enum class ReadingMode { PAGED, CONTINUOUS }
 enum class FitMode { WIDTH, HEIGHT }
@@ -12,6 +15,7 @@ enum class SortOrder { NAME, RECENTLY_ADDED, LAST_READ }
 /** Preferências do usuário, persistidas no DataStore. */
 data class AppSettings(
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
+    val palette: AppPalette = AppPalette.MADOE,
     val readingDirection: ReadingDirection = ReadingDirection.LTR,
     val readingMode: ReadingMode = ReadingMode.PAGED,
     val fitMode: FitMode = FitMode.WIDTH,

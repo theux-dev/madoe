@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                 onDispose { }
             }
 
-            MadoeTheme(darkTheme = dark) {
+            MadoeTheme(darkTheme = dark, palette = current.palette) {
                 MadoeRoot(
                     showOnboarding = !current.onboardingDone,
                     onFinishOnboarding = viewModel::finishOnboarding,

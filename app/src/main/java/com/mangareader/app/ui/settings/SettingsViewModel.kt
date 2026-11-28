@@ -24,6 +24,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import com.mangareader.app.data.model.AppPalette
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
@@ -60,6 +61,7 @@ class SettingsViewModel @Inject constructor(
     }
 
     fun setThemeMode(v: ThemeMode) = viewModelScope.launch { repository.setThemeMode(v) }
+    fun setPalette(v: AppPalette) = viewModelScope.launch { repository.setPalette(v) }
     fun setReadingDirection(v: ReadingDirection) = viewModelScope.launch { repository.setReadingDirection(v) }
     fun setReadingMode(v: ReadingMode) = viewModelScope.launch { repository.setReadingMode(v) }
     fun setFitMode(v: FitMode) = viewModelScope.launch { repository.setFitMode(v) }

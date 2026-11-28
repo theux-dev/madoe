@@ -51,6 +51,8 @@ gerenciamento de arquivos. Ele é publicado aqui como projeto de portfólio.
 **Configurações**
 
 - Tema claro, escuro ou do sistema; preferências de leitura salvas entre sessões.
+- Paletas de cores: Madoe, Papel, Oceano, Floresta e Sakura, nos modos claro e escuro, e, no Android 12 ou
+  mais novo, "Cores do sistema" (Material You). O contraste de cada paleta é conferido por testes automáticos.
 - Gerenciamento das pastas monitoradas e do armazenamento (capas geradas e cache temporário).
 - Introdução na primeira abertura.
 - Tela de licenças de terceiros (em Configurações > Sobre).

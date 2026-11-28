@@ -50,6 +50,17 @@ import com.mangareader.app.data.model.ReadingMode
 import com.mangareader.app.data.model.ThemeMode
 import com.mangareader.app.ui.components.MangaBackTopBar
 import com.mangareader.app.ui.components.halftoneEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.outlined.AutoAwesome
+import androidx.compose.ui.graphics.Color
+import androidx.compose.runtime.remember
+import com.mangareader.app.data.model.AppPalette
+import com.mangareader.app.ui.theme.Palettes
+import com.mangareader.app.ui.theme.isDark
+import com.mangareader.app.ui.theme.isDynamicColorAvailable
 
 @Composable
 fun SettingsScreen(
@@ -90,6 +101,11 @@ fun SettingsScreen(
                     ),
                     selected = s.themeMode,
                     onSelect = viewModel::setThemeMode,
+                )
+                PaletteSetting(
+                    selected = s.palette,
+                    dark = s.themeMode.isDark(),
+                    onSelect = viewModel::setPalette,
                 )
             }
 
@@ -304,3 +320,54 @@ private fun StorageRow(label: String, value: String) {
 private fun appVersion(context: Context): String = runCatching {
     context.packageManager.getPackageInfo(context.packageName, 0).versionName
 }.getOrNull() ?: "?"
+
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+private fun PaletteSetting(selected: AppPalette, dark: Boolean, onSelect: (AppPalette) -> Unit) {
+    // "Cores do sistema" só aparece onde existe (Android 12 ou mais novo).
+    val options = remember { AppPalette.entries.filter { it != AppPalette.SYSTEM || isDynamicColorAvailable() } }
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Text(stringResource(R.string.setting_palette), style = MaterialTheme.typography.titleMedium)
+        FlowRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            options.forEach { palette ->
+                val seed = Palettes.seed(palette, dark)
+                FilterChip(
+                    selected = palette == selected,
+                    onClick = { onSelect(palette) },
+                    label = { Text(stringResource(paletteLabel(palette))) },
+                    leadingIcon = {
+                        if (seed != null) {
+                            Box(Modifier.size(14.dp).background(Color(seed.primary), CircleShape))
+                        } else {
+                            Icon(Icons.Outlined.AutoAwesome, contentDescription = null, modifier = Modifier.size(16.dp))
+                        }
+                    },
+                    colors = FilterChipDefaults.filterChipColors(
+                        selectedContainerColor = MaterialTheme.colorScheme.primary,
+                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                        selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimary,
+                    ),
+                )
+            }
+        }
+        if (selected == AppPalette.SYSTEM) {
+            Text(
+                stringResource(R.string.palette_system_hint),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+    }
+}
+
+private fun paletteLabel(palette: AppPalette): Int = when (palette) {
+    AppPalette.MADOE -> R.string.palette_madoe
+    AppPalette.PAPER -> R.string.palette_paper
+    AppPalette.OCEAN -> R.string.palette_ocean
+    AppPalette.FOREST -> R.string.palette_forest
+    AppPalette.SAKURA -> R.string.palette_sakura
+    AppPalette.SYSTEM -> R.string.palette_system
+}
