@@ -1,0 +1,28 @@
+# Abre pull requests quando uma biblioteca ou uma action do workflow tem versão nova.
+# Cada PR roda o workflow "Build and test"; só faça o merge se ele ficar verde.
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "saturday"
+    open-pull-requests-limit: 5
+    groups:
+      # Kotlin e KSP precisam andar juntos: a versão do KSP começa com a do Kotlin.
+      kotlin-ksp:
+        patterns:
+          - "org.jetbrains.kotlin*"
+          - "com.google.devtools.ksp*"
+      # Compose, lifecycle, navigation, room etc. A integração Hilt do androidx fica de fora.
+      androidx:
+        patterns:
+          - "androidx.*"
+        exclude-patterns:
+          - "androidx.hilt*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "saturday"

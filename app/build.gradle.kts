@@ -42,6 +42,12 @@ android {
     packaging {
         resources.excludes += listOf("/META-INF/{AL2.0,LGPL2.1}", "/META-INF/versions/**")
     }
+    lint {
+        // Erros do lint quebram o build; avisos (versões novas de bibliotecas, recursos sem uso etc.)
+        // ficam só no relatório HTML, para não travar o projeto por coisa pequena.
+        abortOnError = true
+        warningsAsErrors = false
+    }
 }
 
 ksp {

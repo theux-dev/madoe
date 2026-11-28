@@ -36,6 +36,20 @@ jobs:
       - name: Testes de unidade
         run: ./gradlew testDebugUnitTest --no-daemon
 
+      # O lint olha o código e os recursos (acessibilidade, API inexistente no Android 8, textos sem
+      # tradução etc.). Só erros quebram o build; os avisos ficam no relatório.
+      - name: Lint
+        run: ./gradlew lintDebug --no-daemon
+
+      - name: Guardar o relatório do lint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-report
+          path: app/build/reports/lint-results-debug.*
+          if-no-files-found: ignore
+          retention-days: 14
+
       - name: Compilar (debug)
         run: ./gradlew assembleDebug --no-daemon
 

@@ -22,10 +22,10 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.outlined.CollectionsBookmark
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.FolderOpen
-import androidx.compose.material.icons.outlined.MenuBook
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -66,7 +66,7 @@ private data class OnboardingPage(
 fun OnboardingScreen(onFinish: () -> Unit) {
     val pages = remember {
         listOf(
-            OnboardingPage(R.string.onboarding_1_title, R.string.onboarding_1_text, Icons.Outlined.MenuBook),
+            OnboardingPage(R.string.onboarding_1_title, R.string.onboarding_1_text, Icons.AutoMirrored.Outlined.MenuBook),
             OnboardingPage(R.string.onboarding_2_title, R.string.onboarding_2_text, Icons.Outlined.FolderOpen),
             OnboardingPage(R.string.onboarding_3_title, R.string.onboarding_3_text, Icons.Outlined.CollectionsBookmark),
         )

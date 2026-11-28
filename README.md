@@ -192,9 +192,11 @@ cd madoe
 No Windows, use `gradlew.bat`. Se o Gradle não achar o SDK, crie `local.properties` com
 `sdk.dir=/caminho/do/Android/Sdk` ou defina `ANDROID_HOME`.
 
-Um workflow do GitHub Actions (`.github/workflows/build.yml`) roda os testes de unidade e as
-compilações de debug e de release a cada push. O release exercita o R8 e a redução de recursos, e sai sem
-assinatura (nenhum APK é publicado). Os testes instrumentados não rodam lá, porque exigem um emulador.
+Um workflow do GitHub Actions (`.github/workflows/build.yml`) roda os testes de unidade, o Android Lint
+e as compilações de debug e de release a cada push e em cada pull request. O Dependabot abre pull
+requests semanais quando uma biblioteca ou uma action tem versão nova. O release exercita o R8 e a
+redução de recursos, e sai sem assinatura (nenhum APK é publicado). Os testes instrumentados não
+rodam lá, porque exigem um emulador.
 
 Para testar o release no celular, assine com a chave de debug, só para teste:
 
