@@ -1,0 +1,75 @@
+name: Build and test
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+# Só leitura do repositório: o workflow não precisa de nenhuma outra permissão.
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # Usa a versão do Gradle definida em gradle/wrapper/gradle-wrapper.properties.
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Instalar plataforma e build-tools do Android
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-35" "build-tools;35.0.0"
+
+      # Garante o bit de execução mesmo se ele se perder ao subir os arquivos.
+      - name: Permitir execução do Gradle Wrapper
+        run: chmod +x ./gradlew
+
+      # Os passos do Gradle abaixo passam por um script que repete a execução se o Maven Central
+      # responder 429 (limite de requisições). Qualquer outro erro falha na hora.
+
+      - name: Testes de unidade
+        run: bash .github/scripts/gradle-retry.sh testDebugUnitTest
+
+      # O lint olha o código e os recursos (acessibilidade, API inexistente no Android 8, textos sem
+      # tradução etc.). Só erros quebram o build; os avisos ficam no relatório.
+      - name: Lint
+        run: bash .github/scripts/gradle-retry.sh lintDebug
+
+      - name: Guardar o relatório do lint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-report
+          path: app/build/reports/lint-results-debug.*
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Compilar (debug)
+        run: bash .github/scripts/gradle-retry.sh assembleDebug
+
+      # O release liga o R8 (ofuscação e remoção de código) e a redução de recursos, que o build de debug
+      # não exercita. Sai sem assinatura, e nenhum APK é publicado.
+      - name: Compilar (release)
+        run: bash .github/scripts/gradle-retry.sh assembleRelease
+
+      - name: Comparar o tamanho dos APKs
+        run: ls -l app/build/outputs/apk/debug/*.apk app/build/outputs/apk/release/*.apk
+
+      # Se o R8 reclamar de classes ausentes, o missing_rules.txt traz as regras sugeridas.
+      - name: Guardar os relatórios do R8
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r8-release
+          path: app/build/outputs/mapping/release/
+          if-no-files-found: ignore
+          retention-days: 14
