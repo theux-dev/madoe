@@ -22,7 +22,7 @@ jobs:
           java-version: "17"
 
       # Usa a versão do Gradle definida em gradle/wrapper/gradle-wrapper.properties.
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: gradle/actions/setup-gradle@v6
 
       - name: Instalar plataforma e build-tools do Android
         run: |
