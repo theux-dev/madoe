@@ -43,7 +43,7 @@ jobs:
 
       - name: Guardar o relatório do lint
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lint-report
           path: app/build/reports/lint-results-debug.*
@@ -64,7 +64,7 @@ jobs:
       # Se o R8 reclamar de classes ausentes, o missing_rules.txt traz as regras sugeridas.
       - name: Guardar os relatórios do R8
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: r8-release
           path: app/build/outputs/mapping/release/
