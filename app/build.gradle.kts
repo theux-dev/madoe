@@ -24,6 +24,12 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            // Só para testar o release no celular: ./gradlew assembleRelease -PdebugSignedRelease
+            // Assina com a chave de debug (a mesma do app instalado pelo Android Studio). Esse APK não serve
+            // para distribuir. Sem a opção, o release sai sem assinatura, como no GitHub Actions.
+            if (providers.gradleProperty("debugSignedRelease").isPresent) {
+                signingConfig = signingConfigs.getByName("debug")
+            }
         }
     }
 

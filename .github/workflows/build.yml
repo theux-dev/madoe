@@ -38,3 +38,21 @@ jobs:
 
       - name: Compilar (debug)
         run: ./gradlew assembleDebug --no-daemon
+
+      # O release liga o R8 (ofuscação e remoção de código) e a redução de recursos, que o build de debug
+      # não exercita. Sai sem assinatura, e nenhum APK é publicado.
+      - name: Compilar (release)
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Comparar o tamanho dos APKs
+        run: ls -l app/build/outputs/apk/debug/*.apk app/build/outputs/apk/release/*.apk
+
+      # Se o R8 reclamar de classes ausentes, o missing_rules.txt traz as regras sugeridas.
+      - name: Guardar os relatórios do R8
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r8-release
+          path: app/build/outputs/mapping/release/
+          if-no-files-found: ignore
+          retention-days: 14

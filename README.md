@@ -184,6 +184,7 @@ git clone https://github.com/theux-dev/madoe.git
 cd madoe
 
 ./gradlew assembleDebug            # gera app/build/outputs/apk/debug/app-debug.apk
+./gradlew assembleRelease          # build de release (R8 e redução de recursos), sem assinatura
 ./gradlew testDebugUnitTest        # testes de unidade (JVM)
 ./gradlew connectedDebugAndroidTest  # testes instrumentados (exigem dispositivo ou emulador)
 ```
@@ -191,8 +192,16 @@ cd madoe
 No Windows, use `gradlew.bat`. Se o Gradle não achar o SDK, crie `local.properties` com
 `sdk.dir=/caminho/do/Android/Sdk` ou defina `ANDROID_HOME`.
 
-Um workflow do GitHub Actions (`.github/workflows/build.yml`) roda os testes de unidade e a
-compilação de debug a cada push. Os testes instrumentados não rodam lá, porque exigem um emulador.
+Um workflow do GitHub Actions (`.github/workflows/build.yml`) roda os testes de unidade e as
+compilações de debug e de release a cada push. O release exercita o R8 e a redução de recursos, e sai sem
+assinatura (nenhum APK é publicado). Os testes instrumentados não rodam lá, porque exigem um emulador.
+
+Para testar o release no celular, assine com a chave de debug, só para teste:
+
+```bash
+./gradlew assembleRelease -PdebugSignedRelease
+adb install -r app/build/outputs/apk/release/app-release.apk
+```
 
 ## Limitações conhecidas
 

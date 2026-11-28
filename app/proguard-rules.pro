@@ -6,3 +6,7 @@
 -dontwarn org.objectweb.asm.**
 -dontwarn org.slf4j.**
 -keep class com.github.junrar.** { *; }
+
+# Mantém arquivo e linha nos relatórios de erro do build de release (o mapping.txt desfaz o ofuscamento).
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
