@@ -78,6 +78,16 @@ gerenciamento de arquivos. Ele é publicado aqui como projeto de portfólio.
 Capturas feitas com o tema escuro do sistema. Nas telas só aparecem capas dos quadrinhos de exemplo
 (veja a seção seguinte).
 
+### Paletas e ícones
+
+Ilustrações montadas com as cores e o desenho reais do app (não são capturas de tela).
+
+<p align="center"><img src="docs/screenshots/paletas.png" width="720" alt="As cinco paletas de cores do Madoe, nos modos claro e escuro, aplicadas à tela Recentes"></p>
+<p align="center"><sub>As cinco paletas, nos modos claro e escuro. No Android 12 ou mais novo há também "Cores do sistema", que não aparece aqui.</sub></p>
+
+<p align="center"><img src="docs/screenshots/icones.png" width="540" alt="Os quatro ícones do Madoe: padrão, Papel, Oceano e Sakura, e a versão de uma cor"></p>
+<p align="center"><sub>Os quatro ícones à escolha em Configurações &gt; Aparência.</sub></p>
+
 ## Quadrinhos de exemplo
 
 O Madoe **não inclui nenhum quadrinho**. Os exemplos usados nos testes e nas demonstrações são obras
