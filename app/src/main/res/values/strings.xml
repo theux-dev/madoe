@@ -191,4 +191,15 @@
     <string name="palette_sakura">Sakura</string>
     <string name="palette_system">Cores do sistema</string>
     <string name="palette_system_hint">Usa as cores do papel de parede do aparelho (Android 12 ou mais novo).</string>
+    <!-- Fase 8: ícones alternativos -->
+    <string name="setting_app_icon">Ícone do app</string>
+    <string name="app_icon_madoe">Madoe</string>
+    <string name="app_icon_paper">Papel</string>
+    <string name="app_icon_ocean">Oceano</string>
+    <string name="app_icon_sakura">Sakura</string>
+    <string name="app_icon_hint">O ícone muda na tela inicial do celular. Em alguns aparelhos isso leva alguns segundos.</string>
+    <string name="app_icon_change_title">Trocar para o ícone %1$s?</string>
+    <string name="app_icon_change_message">O Android pode fechar o Madoe ao trocar o ícone, e em alguns celulares o atalho some da tela inicial. Se isso acontecer, o app continua na gaveta de apps, e você pode arrastá-lo de novo para a tela inicial.</string>
+    <string name="app_icon_change_confirm">Trocar</string>
+    <string name="app_icon_change_failed">Não foi possível trocar o ícone neste aparelho.</string>
 </resources>

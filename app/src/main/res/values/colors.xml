@@ -2,4 +2,8 @@
 <resources>
     <color name="window_background">#FFFDF8F0</color>
     <color name="ic_launcher_background">#FF1B1D18</color>
+    <!-- Fase 8: fundos dos ícones alternativos -->
+    <color name="ic_launcher_background_paper">#FFF6EEDC</color>
+    <color name="ic_launcher_background_ocean">#FF101A21</color>
+    <color name="ic_launcher_background_sakura">#FF1E1317</color>
 </resources>

@@ -53,6 +53,8 @@ gerenciamento de arquivos. Ele é publicado aqui como projeto de portfólio.
 - Tema claro, escuro ou do sistema; preferências de leitura salvas entre sessões.
 - Paletas de cores: Madoe, Papel, Oceano, Floresta e Sakura, nos modos claro e escuro, e, no Android 12 ou
   mais novo, "Cores do sistema" (Material You). O contraste de cada paleta é conferido por testes automáticos.
+- Ícone do app à escolha (Madoe, Papel, Oceano ou Sakura), com versão de uma cor para os ícones
+  temáticos do Android 13 ou mais novo. A troca usa `activity-alias`, sem permissões e sem reiniciar o app.
 - Gerenciamento das pastas monitoradas e do armazenamento (capas geradas e cache temporário).
 - Introdução na primeira abertura.
 - Tela de licenças de terceiros (em Configurações > Sobre).
@@ -119,6 +121,7 @@ app/src/main/java/com/mangareader/app/
 ├── MadoeApp.kt, MainActivity.kt, MainViewModel.kt
 ├── data/
 │   ├── db/        Room: entidades, DAOs e banco
+│   ├── icon/      troca do ícone do app (activity-alias)
 │   ├── library/   importação, varredura de pastas e tarefas da biblioteca
 │   ├── model/     modelos e enums (formatos, configurações, progresso)
 │   ├── prefs/     preferências (DataStore)
@@ -149,6 +152,9 @@ Decisões de projeto:
 - **Detecção pelo conteúdo.** O tipo do arquivo vem da assinatura dos primeiros bytes, não da extensão.
 - **Tarefas fora das telas.** Importações e varreduras rodam numa coroutine própria, uma de cada vez,
   e continuam se o usuário trocar de aba.
+- **Ícone trocável sem permissões.** Cada ícone é um `<activity-alias>` do manifesto, e só um fica ligado. O
+  `AppIconManager` liga o novo antes de desligar os outros; o estado fica guardado pelo próprio Android,
+  e testes automáticos conferem que manifesto, enum e recursos continuam consistentes.
 - **Banco versionado.** O esquema do Room é exportado (`room.schemaLocation`) para acompanhar a evolução.
 
 ## Características técnicas

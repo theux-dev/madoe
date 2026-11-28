@@ -3,6 +3,7 @@ package com.mangareader.app.ui.settings
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mangareader.app.data.icon.AppIconManager
 import com.mangareader.app.data.library.LibraryManager
 import com.mangareader.app.data.library.LibraryTaskState
 import com.mangareader.app.data.model.AppSettings
@@ -24,6 +25,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import com.mangareader.app.data.model.AppIcon
 import com.mangareader.app.data.model.AppPalette
 
 @HiltViewModel
@@ -31,6 +33,7 @@ class SettingsViewModel @Inject constructor(
     private val repository: SettingsRepository,
     private val library: LibraryManager,
     private val cacheManager: CacheManager,
+    private val iconManager: AppIconManager,
 ) : ViewModel() {
 
     val settings: StateFlow<AppSettings> = repository.settings
@@ -44,6 +47,20 @@ class SettingsViewModel @Inject constructor(
     /** Bytes liberados na última limpeza, para avisar o usuário; `null` antes de qualquer limpeza. */
     private val _freedBytes = MutableStateFlow<Long?>(null)
     val freedBytes: StateFlow<Long?> = _freedBytes.asStateFlow()
+
+    /** Ícone do app ativo agora (vem do Android, não do DataStore). */
+    private val _appIcon = MutableStateFlow(iconManager.current())
+    val appIcon: StateFlow<AppIcon> = _appIcon.asStateFlow()
+
+    /** `true` quando o Android recusou a última troca de ícone. */
+    private val _iconChangeFailed = MutableStateFlow(false)
+    val iconChangeFailed: StateFlow<Boolean> = _iconChangeFailed.asStateFlow()
+
+    fun setAppIcon(icon: AppIcon) {
+        _iconChangeFailed.value = !iconManager.select(icon)
+        // Relê o estado real: se a troca falhou no meio, a tela mostra o que o Android tem de fato.
+        _appIcon.value = iconManager.current()
+    }
 
     init {
         refreshStorage()

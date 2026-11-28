@@ -72,6 +72,8 @@ fun SettingsScreen(
     val task by viewModel.libraryState.collectAsStateWithLifecycle()
     val storage by viewModel.storage.collectAsStateWithLifecycle()
     val freed by viewModel.freedBytes.collectAsStateWithLifecycle()
+    val appIcon by viewModel.appIcon.collectAsStateWithLifecycle()
+    val iconChangeFailed by viewModel.iconChangeFailed.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val folderPicker = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
         if (uri != null) viewModel.addFolder(uri)
@@ -106,6 +108,11 @@ fun SettingsScreen(
                     selected = s.palette,
                     dark = s.themeMode.isDark(),
                     onSelect = viewModel::setPalette,
+                )
+                AppIconSetting(
+                    selected = appIcon,
+                    failed = iconChangeFailed,
+                    onSelect = viewModel::setAppIcon,
                 )
             }
 
